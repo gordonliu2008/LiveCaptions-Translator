@@ -86,12 +86,13 @@ namespace LiveCaptionsTranslator.utils
         {
             var history = new List<TranslationHistoryEntry>();
             int maxPage = 1;
-            using (var command = new SqliteCommand(@$"SELECT COUNT() AS maxPage
+            using (var command = new SqliteCommand(@$"SELECT COUNT(*)
                 FROM TranslationHistory
                 WHERE SourceText LIKE '%{searchText}%' OR TranslatedText LIKE '%{searchText}%'",
                 GetConnection()))
             {
-                maxPage = Convert.ToInt32(await command.ExecuteScalarAsync(token)) / maxRow;
+                int totalCount = Convert.ToInt32(await command.ExecuteScalarAsync(token));
+                maxPage = (totalCount + maxRow - 1) / maxRow;
             }
 
             using (var command = new SqliteCommand(@$"

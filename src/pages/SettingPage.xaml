@@ -191,6 +191,16 @@
                     OffContent="Off"
                     OnContent="On" />
             </StackPanel>
+            <StackPanel Margin="15,10,0,0" Orientation="Vertical">
+                <TextBlock Margin="2.5,0,0,5" Text="Stable Only" />
+                <ui:ToggleSwitch
+                    Width="100"
+                    Height="30"
+                    Padding="10,4,10,7"
+                    IsChecked="{Binding MainWindow.StableTranslationOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                    OffContent="Off"
+                    OnContent="On" />
+            </StackPanel>
         </StackPanel>
 
         <StackPanel Grid.Column="3" Orientation="Vertical">

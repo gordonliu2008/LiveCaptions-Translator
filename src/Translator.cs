@@ -208,7 +208,8 @@ namespace LiveCaptionsTranslator
                 }
                 else if (!string.IsNullOrEmpty(RegexPatterns.NoticePrefix().Replace(
                              translatedText, string.Empty).Trim()) &&
-                         string.CompareOrdinal(Caption.TranslatedCaption, translatedText) != 0)
+                         string.CompareOrdinal(Caption.TranslatedCaption, translatedText) != 0 &&
+                         (!Setting.MainWindow.StableTranslationOnly || isChoke))
                 {
                     // Main page
                     Caption.TranslatedCaption = translatedText;

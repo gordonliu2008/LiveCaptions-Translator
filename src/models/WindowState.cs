@@ -11,6 +11,7 @@ namespace LiveCaptionsTranslator.models
         private bool captionLogEnabled = false;
         private int captionLogMax = 2;
         private bool latencyShow = false;
+        private bool stableTranslationOnly = false;
 
         public bool Topmost
         {
@@ -46,6 +47,15 @@ namespace LiveCaptionsTranslator.models
             {
                 latencyShow = value;
                 OnPropertyChanged("LatencyShow");
+            }
+        }
+        public bool StableTranslationOnly
+        {
+            get => stableTranslationOnly;
+            set
+            {
+                stableTranslationOnly = value;
+                OnPropertyChanged("StableTranslationOnly");
             }
         }
 

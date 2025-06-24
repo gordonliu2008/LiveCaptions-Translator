@@ -42,13 +42,16 @@ namespace LiveCaptionsTranslator.models
             }
             
             output = translationTask.Task.Result;
-            var translatedText = output.Item1;
-            
+            var (translatedText, isChoke) = output;
+
             // Log after translation.
             bool isOverwrite = await Translator.IsOverwrite(translationTask.OriginalText);
-            if (!isOverwrite)
-                await Translator.AddLogCard();
-            await Translator.Log(translationTask.OriginalText, translatedText, isOverwrite);
+            if (!Translator.Setting.MainWindow.StableTranslationOnly || isChoke)
+            {
+                if (!isOverwrite)
+                    await Translator.AddLogCard();
+                await Translator.Log(translationTask.OriginalText, translatedText, isOverwrite);
+            }
         }
     }
 
